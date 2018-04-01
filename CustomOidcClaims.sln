@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2015
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomOidcClaims", "CustomOidcClaims\CustomOidcClaims.csproj", "{60AAEC59-89AC-4001-B717-0A30B2143629}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{60AAEC59-89AC-4001-B717-0A30B2143629}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60AAEC59-89AC-4001-B717-0A30B2143629}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60AAEC59-89AC-4001-B717-0A30B2143629}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60AAEC59-89AC-4001-B717-0A30B2143629}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0198022B-FFB3-4DA8-B124-BA0C2733F55E}
+	EndGlobalSection
+EndGlobal
