@@ -45,6 +45,7 @@ namespace CustomOidcClaims
                         string oid = ctx.Principal.FindFirstValue("http://schemas.microsoft.com/identity/claims/objectidentifier");
                         //Get the Azure AD tenant identifier
                         string tid = ctx.Principal.FindFirstValue("http://schemas.microsoft.com/identity/claims/tenantid");
+                        string userPrincipalName = ctx.Principal.FindFirstValue(ClaimTypes.Name);
 
                         var db = ctx.HttpContext.RequestServices.GetRequiredService<UserDbContext>();
                         User user = await db.Users.SingleOrDefaultAsync(u => u.ObjectId == oid && u.TenantId == tid);
@@ -52,7 +53,6 @@ namespace CustomOidcClaims
                         if(user == null)
                         {
                             //Add user to database
-                            string userPrincipalName = ctx.Principal.FindFirstValue(ClaimTypes.Name);
                             user = new User
                             {
                                 IsAdmin = false,
@@ -61,6 +61,12 @@ namespace CustomOidcClaims
                                 UserPrincipalName = userPrincipalName
                             };
                             await db.Users.AddAsync(user);
+                            await db.SaveChangesAsync();
+                        }
+                        else
+                        {
+                            // UPN can change, so update it
+                            user.UserPrincipalName = userPrincipalName;
                             await db.SaveChangesAsync();
                         }
                         
