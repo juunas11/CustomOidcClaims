@@ -10,7 +10,7 @@ namespace CustomOidcClaims
     {
         public static void Main(string[] args)
         {
-            var host = BuildWebHost(args);
+            var host = CreateWebHostBuilder(args).Build();
 
             using (var serviceScope = host.Services.GetService<IServiceScopeFactory>().CreateScope())
             {
@@ -21,9 +21,8 @@ namespace CustomOidcClaims
             host.Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .Build();
+                .UseStartup<Startup>();
     }
 }

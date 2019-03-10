@@ -1,4 +1,4 @@
-# Adding custom claims to a user when using OpenID Connect in ASP.NET Core 2.0
+# Adding custom claims to a user when using OpenID Connect in ASP.NET Core 2.1
 
 This sample requires you to setup:
 

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,11 +19,11 @@ namespace CustomOidcClaims
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
         
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<UserDbContext>(o => o.UseSqlServer(connectionString));
@@ -31,6 +32,7 @@ namespace CustomOidcClaims
             {
                 o.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 o.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+                o.DefaultForbidScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             })
             .AddCookie()
             .AddOpenIdConnect(o =>
@@ -91,7 +93,6 @@ namespace CustomOidcClaims
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
             }
             else
             {
